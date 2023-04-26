@@ -1,6 +1,6 @@
 <template>
     <div class="login-container p-d-flex p-jc-center p-ai-center">
-      <form @submit="login" class="p-card padding">
+      <form @submit.prevent="login" class="p-card padding">
         <img src="../assets/logo.png" class="img-login p-mb-2 p-mt-4" />
         <div class="p-fluid">
           <div class="p-field p-mb-2">
@@ -13,12 +13,11 @@
         </div>
       </form>
     </div>
-    <Toast :position="'bottom-center'" />
+    <Toast :position="'top-right'" />
   </template>
   
   <script lang="ts">
   import { defineComponent } from 'vue';
-  import {  useRouter } from 'vue-router';
   
   export default defineComponent({
     data() {
@@ -36,6 +35,8 @@
   
           // Redireciona para a página home.
          this.$router.push('/');
+        } else {
+          this.$toast.add({ severity: 'error', summary: 'Erro!', detail: 'Usuário ou senha incorretos', life: 3000 });
         }
       },
     },
