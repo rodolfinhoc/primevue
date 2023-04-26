@@ -10,6 +10,8 @@ import PrimeVue from 'primevue/config';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Toast from 'primevue/toast';
+import Sidebar from 'primevue/sidebar';
+import Divider from 'primevue/divider';
 import { createApp } from 'vue';
 
 import App from './App.vue';
@@ -25,4 +27,6 @@ app.component('InputText', InputText);
 app.component('Card', Card);
 app.component('Password', Password);
 app.component('Toast', Toast);
+app.component('Sidebar', Sidebar);
+app.component('Divider', Divider);
 app.mount('#app');
