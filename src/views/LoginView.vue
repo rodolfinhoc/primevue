@@ -18,7 +18,7 @@
   
   <script lang="ts">
   import { defineComponent } from 'vue';
-  import { useRouter } from 'vue-router';
+  import {  useRouter } from 'vue-router';
   
   export default defineComponent({
     data() {
@@ -28,16 +28,14 @@
       };
     },
     methods: {
-      login() {
-        const router = useRouter();
-  
+      login() {  
         // Faz a verificação das credenciais do usuário aqui.
-        if (this.usuario === 'admin' && this.senha === 'password') {
+        if (this.usuario === 'rodolfo' && this.senha === '123') {
           // Define o estado de login para verdadeiro no armazenamento local.
           localStorage.setItem('loggedIn', 'true');
   
           // Redireciona para a página home.
-          router.push('/');
+         this.$router.push('/');
         }
       },
     },
