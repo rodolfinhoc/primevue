@@ -26,14 +26,17 @@
   
   <script lang="ts">
   import { defineComponent, ref } from 'vue';
+  import { useRouter } from 'vue-router';
   
   export default defineComponent({
     name: 'HeaderComponent',
     setup() {
       const visibleSidebar = ref(false);
-  
+      const router = useRouter();
+      
       const logout = async () => {
-        console.log('teste');
+        localStorage.removeItem('loggedIn');
+        await router.push('/login');
         // await service.logout();
       };
   
