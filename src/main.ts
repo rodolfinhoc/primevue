@@ -1,7 +1,28 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import './registerServiceWorker'
-import router from './router'
-import store from './store'
+import './registerServiceWorker';
+import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
+import 'primevue/resources/primevue.min.css';
+import 'primevue/resources/themes/lara-light-teal/theme.css';
 
-createApp(App).use(store).use(router).mount('#app')
+import Button from 'primevue/button';
+import Card from 'primevue/card';
+import PrimeVue from 'primevue/config';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import Toast from 'primevue/toast';
+import { createApp } from 'vue';
+
+import App from './App.vue';
+import router from './router';
+import store from './store';
+
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.use(PrimeVue, { ripple: true });
+app.component('Button', Button);
+app.component('InputText', InputText);
+app.component('Card', Card);
+app.component('Password', Password);
+app.component('Toast', Toast);
+app.mount('#app');
