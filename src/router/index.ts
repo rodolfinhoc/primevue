@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
     component: LoginView,
   },
   {
-    path: "*",
+    path: "/:pathMatch(.*)*",
     redirect: "/login",
   },
 ];
