@@ -1,26 +1,24 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
+import { authGuard } from "@/services/authentication/authGuard";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
+    path: "/home",
     name: "home",
     component: HomeView,
     // Usa o guard para verificar se o usuário está autenticado
-    beforeEnter: (to, from, next) => {
-      const loggedIn = localStorage.getItem("loggedIn");
-      if (!loggedIn) {
-        next("/login");
-      } else {
-        next();
-      }
-    },
+    beforeEnter: [authGuard],
   },
   {
     path: "/login",
     name: "login",
     component: LoginView,
+  },
+  {
+    path: "*",
+    redirect: "/login",
   },
 ];
 
