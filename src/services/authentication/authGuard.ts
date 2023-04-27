@@ -3,16 +3,14 @@ import { NavigationGuard } from "vue-router";
 export const authGuard: NavigationGuard = (to, from, next) => {
   const isAuthenticated = Boolean(localStorage.getItem("loggedIn"));
 
-  if (isAuthenticated) {
-    // O usuário está autenticado, permite o acesso à rota solicitada
+  if (to.name === 'home') {
+    // o usuário já está na rota home
+    next();
+  } else if (isAuthenticated) {
+    // o usuário está autenticado e não está na rota home
     next("/home");
   } else {
-    // O usuário não está autenticado, redireciona para a tela de login
+    // o usuário não está autenticado
     next("/login");
   }
 };
-
-function validateStorage() {
-  const isAuthenticated = Boolean(localStorage.getItem("loggedIn"));
-  return Boolean(isAuthenticated !== null ? isAuthenticated : true);
-}
