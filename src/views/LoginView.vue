@@ -17,6 +17,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import axios from 'axios'; // Importe a biblioteca Axios
 import { useRouter } from 'vue-router';
 import { useToast } from 'primevue/usetoast';
 
@@ -28,16 +29,27 @@ export default defineComponent({
     const router = useRouter();
     const toast = useToast();
 
-    function login() {
-      // Faz a verificação das credenciais do usuário aqui.
-      if (usuario.value === 'rodolfo' && senha.value === '123') {
-        // Define o estado de login para verdadeiro no armazenamento local.
-        localStorage.setItem('loggedIn', 'true');
+    async function login() {
+      try {
+        // Faz a requisição POST para o endpoint de login da sua API
+        const response = await axios.post('http://127.0.0.1:5000/login', {
+          usuario: usuario.value,
+          senha: senha.value,
+        });
 
-        // Redireciona para a página home.
-        router.push('/home');
-      } else {
-        toast.add({ severity: 'error', summary: 'Erro!', detail: 'Usuário ou senha incorretos', life: 3000 });
+        // Verifica se a resposta da API indica sucesso
+        if (response.status === 200) {
+          // Define o estado de login para verdadeiro no armazenamento local.
+          localStorage.setItem('loggedIn', 'true');
+
+          // Redireciona para a página home.
+          router.push('/home');
+        } else {
+          toast.add({ severity: 'error', summary: 'Erro!', detail: 'Usuário ou senha incorretos', life: 3000 });
+        }
+      } catch (error) {
+        console.error(error);
+        toast.add({ severity: 'error', summary: 'Erro!', detail: 'Ocorreu um erro durante o login', life: 3000 });
       }
     }
 
