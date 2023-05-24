@@ -36,6 +36,7 @@
       
       const logout = async () => {
         localStorage.removeItem('loggedIn');
+        localStorage.removeItem('access_token');
         await router.push('/login');
         // await service.logout();
       };

@@ -40,7 +40,9 @@ export default defineComponent({
         // Verifica se a resposta da API indica sucesso
         if (response.status === 200) {
           // Define o estado de login para verdadeiro no armazenamento local.
+          console.log(response);
           localStorage.setItem('loggedIn', 'true');
+          localStorage.setItem('access_token', response.data.access_token);
 
           // Redireciona para a página home.
           router.push('/home');
